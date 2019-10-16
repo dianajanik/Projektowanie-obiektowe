@@ -1,7 +1,7 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
+from library.singleton import Singleton
 
-
-class IDao(ABC):
+class IDao(metaclass=Singleton):
 
     @abstractmethod
     def read_all(self):

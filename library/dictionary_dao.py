@@ -1,7 +1,10 @@
-from zadanie1.i_dao import IDao
+from library.i_dao import IDao
+from library.singleton import Singleton
+from library.person import Person
+from library.book import Book
 
 
-class DictionaryDao(IDao):
+class DictionaryDao(IDao, metaclass=Singleton):
     def __init__(self):
         self.storege = dict()
 
@@ -39,6 +42,18 @@ class DictionaryDao(IDao):
     def delete(self, id):
         print("Deleting element with id {}".format(id))
         try:
+            # remove id in each book if removing a person
+            element = self.storege[id]
+            if isinstance(element, Person):
+                self.return_books_by_person(element.id)
+
             del self.storege[id]
         except:
             print("There is no element with given id!")
+
+    def return_books_by_person(self, person_id):
+        for id, element in self.storege.items():
+            if isinstance(element, Book):
+                if element.user_id == person_id:
+                    element.user_id = -1
+                    print("Returning book {} by user with ID : {}".format(element.id, person_id))
