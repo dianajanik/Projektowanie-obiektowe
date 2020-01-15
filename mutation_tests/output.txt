@@ -1,0 +1,332 @@
+[*] Start mutation process:
+   - targets: matrix_multiplication
+   - tests: matrix_multiplication_tests
+[*] 4 tests passed:
+   - matrix_multiplication_tests [0.00125 s]
+[*] Start mutants generation and execution:
+   - [#   1] AOR matrix_multiplication:
+--------------------------------------------------------------------------------
+  44:         for column_a in range(0, shape_a[1]):
+  45:
+  46:
+  47:             for column_b in range(0, shape_b[1]):
+- 48:                 output[row_a][column_b] += a[row_a][column_a] * b[column_a][column_b]
++ 48:                 output[row_a][column_b] += a[row_a][column_a] / b[column_a][column_b]
+  49:     return output
+--------------------------------------------------------------------------------
+[0.01653 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#   2] AOR matrix_multiplication:
+--------------------------------------------------------------------------------
+  44:         for column_a in range(0, shape_a[1]):
+  45:
+  46:
+  47:             for column_b in range(0, shape_b[1]):
+- 48:                 output[row_a][column_b] += a[row_a][column_a] * b[column_a][column_b]
++ 48:                 output[row_a][column_b] += a[row_a][column_a] // b[column_a][column_b]
+  49:     return output
+--------------------------------------------------------------------------------
+[0.01409 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#   3] AOR matrix_multiplication:
+--------------------------------------------------------------------------------
+  44:         for column_a in range(0, shape_a[1]):
+  45:
+  46:
+  47:             for column_b in range(0, shape_b[1]):
+- 48:                 output[row_a][column_b] += a[row_a][column_a] * b[column_a][column_b]
++ 48:                 output[row_a][column_b] += a[row_a][column_a] ** b[column_a][column_b]
+  49:     return output
+--------------------------------------------------------------------------------
+[0.01510 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#   4] ASR matrix_multiplication:
+--------------------------------------------------------------------------------
+  44:         for column_a in range(0, shape_a[1]):
+  45:
+  46:
+  47:             for column_b in range(0, shape_b[1]):
+- 48:                 output[row_a][column_b] += a[row_a][column_a] * b[column_a][column_b]
++ 48:                 output[row_a][column_b] -= a[row_a][column_a] * b[column_a][column_b]
+  49:     return output
+--------------------------------------------------------------------------------
+[0.01196 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#   5] COD matrix_multiplication:
+--------------------------------------------------------------------------------
+  24:     ------
+  25:     WrongShape
+  26:     WrongParameters
+  27:     '''
+- 28:     if (not ((isinstance(a, list) or isinstance(a, (np.ndarray, np.generic)))) or not ((isinstance(b, list) or isinstance(b, (np.ndarray, np.generic))))):
++ 28:     if ((isinstance(a, list) or isinstance(a, (np.ndarray, np.generic))) or not ((isinstance(b, list) or isinstance(b, (np.ndarray, np.generic))))):
+  29:         raise WrongParameters()
+  30:
+  31:     (a, b) = (np.array(a), np.array(b))
+  32:
+--------------------------------------------------------------------------------
+[0.01099 s] killed by test_bad_argument (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#   6] COD matrix_multiplication:
+--------------------------------------------------------------------------------
+  24:     ------
+  25:     WrongShape
+  26:     WrongParameters
+  27:     '''
+- 28:     if (not ((isinstance(a, list) or isinstance(a, (np.ndarray, np.generic)))) or not ((isinstance(b, list) or isinstance(b, (np.ndarray, np.generic))))):
++ 28:     if (not ((isinstance(a, list) or isinstance(a, (np.ndarray, np.generic)))) or (isinstance(b, list) or isinstance(b, (np.ndarray, np.generic)))):
+  29:         raise WrongParameters()
+  30:
+  31:     (a, b) = (np.array(a), np.array(b))
+  32:
+--------------------------------------------------------------------------------
+[0.01195 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#   7] COI matrix_multiplication:
+--------------------------------------------------------------------------------
+  24:     ------
+  25:     WrongShape
+  26:     WrongParameters
+  27:     '''
+- 28:     if (not ((isinstance(a, list) or isinstance(a, (np.ndarray, np.generic)))) or not ((isinstance(b, list) or isinstance(b, (np.ndarray, np.generic))))):
++ 28:     if not ((not ((isinstance(a, list) or isinstance(a, (np.ndarray, np.generic)))) or not ((isinstance(b, list) or isinstance(b, (np.ndarray, np.generic)))))):
+  29:         raise WrongParameters()
+  30:
+  31:     (a, b) = (np.array(a), np.array(b))
+  32:
+--------------------------------------------------------------------------------
+[0.01239 s] killed by test_bad_argument (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#   8] COI matrix_multiplication:
+--------------------------------------------------------------------------------
+  32:
+  33:     (shape_a, shape_b) = (a.shape, b.shape)
+  34:
+  35:
+- 36:     if shape_a[1] != shape_b[0]:
++ 36:     if not (shape_a[1] != shape_b[0]):
+  37:         raise WrongShape()
+  38:
+  39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[1], shape_b[1]))
+  40:     output = np.zeros((x, y))
+--------------------------------------------------------------------------------
+[0.00897 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#   9] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  32:
+  33:     (shape_a, shape_b) = (a.shape, b.shape)
+  34:
+  35:
+- 36:     if shape_a[1] != shape_b[0]:
++ 36:     if shape_a[2] != shape_b[0]:
+  37:         raise WrongShape()
+  38:
+  39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[1], shape_b[1]))
+  40:     output = np.zeros((x, y))
+--------------------------------------------------------------------------------
+[0.00948 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  10] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  32:
+  33:     (shape_a, shape_b) = (a.shape, b.shape)
+  34:
+  35:
+- 36:     if shape_a[1] != shape_b[0]:
++ 36:     if shape_a[1] != shape_b[1]:
+  37:         raise WrongShape()
+  38:
+  39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[1], shape_b[1]))
+  40:     output = np.zeros((x, y))
+--------------------------------------------------------------------------------
+[0.01258 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  11] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  35:
+  36:     if shape_a[1] != shape_b[0]:
+  37:         raise WrongShape()
+  38:
+- 39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[1], shape_b[1]))
++ 39:     (x, y) = (min(shape_a[1], shape_b[0]), min(shape_a[1], shape_b[1]))
+  40:     output = np.zeros((x, y))
+  41:
+  42:
+  43:     for row_a in range(0, shape_a[0]):
+--------------------------------------------------------------------------------
+[0.01291 s] killed by test_correct_multiply2 (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  12] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  35:
+  36:     if shape_a[1] != shape_b[0]:
+  37:         raise WrongShape()
+  38:
+- 39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[1], shape_b[1]))
++ 39:     (x, y) = (min(shape_a[0], shape_b[1]), min(shape_a[1], shape_b[1]))
+  40:     output = np.zeros((x, y))
+  41:
+  42:
+  43:     for row_a in range(0, shape_a[0]):
+--------------------------------------------------------------------------------
+[0.01219 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  13] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  35:
+  36:     if shape_a[1] != shape_b[0]:
+  37:         raise WrongShape()
+  38:
+- 39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[1], shape_b[1]))
++ 39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[2], shape_b[1]))
+  40:     output = np.zeros((x, y))
+  41:
+  42:
+  43:     for row_a in range(0, shape_a[0]):
+--------------------------------------------------------------------------------
+[0.01146 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  14] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  35:
+  36:     if shape_a[1] != shape_b[0]:
+  37:         raise WrongShape()
+  38:
+- 39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[1], shape_b[1]))
++ 39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[1], shape_b[2]))
+  40:     output = np.zeros((x, y))
+  41:
+  42:
+  43:     for row_a in range(0, shape_a[0]):
+--------------------------------------------------------------------------------
+[0.01177 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  15] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[1], shape_b[1]))
+  40:     output = np.zeros((x, y))
+  41:
+  42:
+- 43:     for row_a in range(0, shape_a[0]):
++ 43:     for row_a in range(1, shape_a[0]):
+  44:         for column_a in range(0, shape_a[1]):
+  45:
+  46:
+  47:             for column_b in range(0, shape_b[1]):
+--------------------------------------------------------------------------------
+[0.01269 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  16] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[1], shape_b[1]))
+  40:     output = np.zeros((x, y))
+  41:
+  42:
+- 43:     for row_a in range(0, shape_a[0]):
++ 43:     for row_a in range(0, shape_a[1]):
+  44:         for column_a in range(0, shape_a[1]):
+  45:
+  46:
+  47:             for column_b in range(0, shape_b[1]):
+--------------------------------------------------------------------------------
+[0.01025 s] killed by test_correct_multiply2 (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  17] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  40:     output = np.zeros((x, y))
+  41:
+  42:
+  43:     for row_a in range(0, shape_a[0]):
+- 44:         for column_a in range(0, shape_a[1]):
++ 44:         for column_a in range(1, shape_a[1]):
+  45:
+  46:
+  47:             for column_b in range(0, shape_b[1]):
+  48:                 output[row_a][column_b] += a[row_a][column_a] * b[column_a][column_b]
+--------------------------------------------------------------------------------
+[0.01202 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  18] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  40:     output = np.zeros((x, y))
+  41:
+  42:
+  43:     for row_a in range(0, shape_a[0]):
+- 44:         for column_a in range(0, shape_a[1]):
++ 44:         for column_a in range(0, shape_a[2]):
+  45:
+  46:
+  47:             for column_b in range(0, shape_b[1]):
+  48:                 output[row_a][column_b] += a[row_a][column_a] * b[column_a][column_b]
+--------------------------------------------------------------------------------
+[0.00924 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  19] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  43:     for row_a in range(0, shape_a[0]):
+  44:         for column_a in range(0, shape_a[1]):
+  45:
+  46:
+- 47:             for column_b in range(0, shape_b[1]):
++ 47:             for column_b in range(1, shape_b[1]):
+  48:                 output[row_a][column_b] += a[row_a][column_a] * b[column_a][column_b]
+  49:     return output
+--------------------------------------------------------------------------------
+[0.01105 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  20] CRP matrix_multiplication:
+--------------------------------------------------------------------------------
+  43:     for row_a in range(0, shape_a[0]):
+  44:         for column_a in range(0, shape_a[1]):
+  45:
+  46:
+- 47:             for column_b in range(0, shape_b[1]):
++ 47:             for column_b in range(0, shape_b[2]):
+  48:                 output[row_a][column_b] += a[row_a][column_a] * b[column_a][column_b]
+  49:     return output
+--------------------------------------------------------------------------------
+[0.01343 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  21] LCR matrix_multiplication:
+--------------------------------------------------------------------------------
+  24:     ------
+  25:     WrongShape
+  26:     WrongParameters
+  27:     '''
+- 28:     if (not ((isinstance(a, list) or isinstance(a, (np.ndarray, np.generic)))) or not ((isinstance(b, list) or isinstance(b, (np.ndarray, np.generic))))):
++ 28:     if (not ((isinstance(a, list) or isinstance(a, (np.ndarray, np.generic)))) and not ((isinstance(b, list) or isinstance(b, (np.ndarray, np.generic))))):
+  29:         raise WrongParameters()
+  30:
+  31:     (a, b) = (np.array(a), np.array(b))
+  32:
+--------------------------------------------------------------------------------
+[0.00917 s] killed by test_bad_argument (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  22] LCR matrix_multiplication:
+--------------------------------------------------------------------------------
+  24:     ------
+  25:     WrongShape
+  26:     WrongParameters
+  27:     '''
+- 28:     if (not ((isinstance(a, list) or isinstance(a, (np.ndarray, np.generic)))) or not ((isinstance(b, list) or isinstance(b, (np.ndarray, np.generic))))):
++ 28:     if (not ((isinstance(a, list) and isinstance(a, (np.ndarray, np.generic)))) or not ((isinstance(b, list) or isinstance(b, (np.ndarray, np.generic))))):
+  29:         raise WrongParameters()
+  30:
+  31:     (a, b) = (np.array(a), np.array(b))
+  32:
+--------------------------------------------------------------------------------
+[0.01289 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  23] LCR matrix_multiplication:
+--------------------------------------------------------------------------------
+  24:     ------
+  25:     WrongShape
+  26:     WrongParameters
+  27:     '''
+- 28:     if (not ((isinstance(a, list) or isinstance(a, (np.ndarray, np.generic)))) or not ((isinstance(b, list) or isinstance(b, (np.ndarray, np.generic))))):
++ 28:     if (not ((isinstance(a, list) or isinstance(a, (np.ndarray, np.generic)))) or not ((isinstance(b, list) and isinstance(b, (np.ndarray, np.generic))))):
+  29:         raise WrongParameters()
+  30:
+  31:     (a, b) = (np.array(a), np.array(b))
+  32:
+--------------------------------------------------------------------------------
+[0.01042 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+   - [#  24] ROR matrix_multiplication:
+--------------------------------------------------------------------------------
+  32:
+  33:     (shape_a, shape_b) = (a.shape, b.shape)
+  34:
+  35:
+- 36:     if shape_a[1] != shape_b[0]:
++ 36:     if shape_a[1] == shape_b[0]:
+  37:         raise WrongShape()
+  38:
+  39:     (x, y) = (min(shape_a[0], shape_b[0]), min(shape_a[1], shape_b[1]))
+  40:     output = np.zeros((x, y))
+--------------------------------------------------------------------------------
+[0.00905 s] killed by test_correct_multiply (matrix_multiplication_tests.MatrixMultiplicationTests)
+[*] Mutation score [1.65096 s]: 100.0%
+   - all: 24
+   - killed: 24 (100.0%)
+   - survived: 0 (0.0%)
+   - incompetent: 0 (0.0%)
+   - timeout: 0 (0.0%)
